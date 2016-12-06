@@ -11,6 +11,8 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
+    
+    
     private let locationManager = CLLocationManager()
     
     @IBOutlet weak var mapView: MKMapView! {
@@ -33,11 +35,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     /// 領域の観測開始時の処理
     func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
+        let alert = UIAlertController(title: "Notice", message: "監視開始", preferredStyle: .alert)
+        
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        
+        alert.addAction(defaultAction)
+        
+        present(alert, animated: true, completion: nil)
     }
     
     /// 領域に入った時の処理
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        let alert = UIAlertController(title: "Notice", message: "新馬場です", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Notice", message: "\(region.identifier)です", preferredStyle: .alert)
         
         let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         
@@ -48,7 +57,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     /// 領域から出た時の処理
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        let alert = UIAlertController(title: "Notice", message: "新馬場からでました", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Notice", message: "\(region.identifier)からでました", preferredStyle: .alert)
         
         let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         
@@ -75,6 +84,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.allowsBackgroundLocationUpdates = true
         
         locationManager.requestAlwaysAuthorization()
         
@@ -89,16 +99,25 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         stopMonitoring()
         
         // 監視する領域
-        let region = CLCircularRegion(
+        let shinbanbaRegion = CLCircularRegion(
             center: CLLocationCoordinate2DMake(35.616494, 139.741501),
             radius: 200.0,
-            identifier: "Shinbanba"
+            identifier: "新馬場駅"
+        )
+        let seisekiRegion = CLCircularRegion(
+            center: CLLocationCoordinate2DMake(35.618927, 139.744431),
+            radius: 200.0,
+            identifier: "聖蹟公園"
         )
         
-        locationManager.startMonitoring(for: region)
+        locationManager.startMonitoring(for: shinbanbaRegion)
+        locationManager.startMonitoring(for: seisekiRegion)
         
-        let circle = MKCircle(center: region.center, radius: region.radius)
-        mapView.add(circle)
+        let shinbanbaCircle = MKCircle(center: shinbanbaRegion.center, radius: shinbanbaRegion.radius)
+        let seisekiCircle = MKCircle(center: seisekiRegion.center, radius: seisekiRegion.radius)
+        mapView.add(shinbanbaCircle)
+        mapView.add(seisekiCircle)
+        
     }
 
     override func didReceiveMemoryWarning() {
