@@ -29,14 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        let content = UNMutableNotificationContent()
-        content.title = "foo"
-        content.body = "hoge"
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-        let request = UNNotificationRequest(identifier: "foo", content: content, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
