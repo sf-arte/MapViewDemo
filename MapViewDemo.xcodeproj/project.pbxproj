@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B21D3EF1E013A9C00AE62D0 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B21D3EE1E013A9C00AE62D0 /* LocationManager.swift */; };
 		6BF001511DF54A0E00DFFDB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF001501DF54A0E00DFFDB4 /* AppDelegate.swift */; };
 		6BF001531DF54A0E00DFFDB4 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF001521DF54A0E00DFFDB4 /* MapViewController.swift */; };
 		6BF001561DF54A0E00DFFDB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BF001541DF54A0E00DFFDB4 /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6B21D3EE1E013A9C00AE62D0 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		6B9F81641DF68CBB008CD2A5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		6BF0014D1DF54A0E00DFFDB4 /* MapViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BF001501DF54A0E00DFFDB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				6BF0017E1DF54A2700DFFDB4 /* Supporting Files */,
 				6BF001521DF54A0E00DFFDB4 /* MapViewController.swift */,
 				6BF001541DF54A0E00DFFDB4 /* Main.storyboard */,
+				6B21D3EE1E013A9C00AE62D0 /* LocationManager.swift */,
 			);
 			path = MapViewDemo;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 			files = (
 				6BF001531DF54A0E00DFFDB4 /* MapViewController.swift in Sources */,
 				6BF001511DF54A0E00DFFDB4 /* AppDelegate.swift in Sources */,
+				6B21D3EF1E013A9C00AE62D0 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
