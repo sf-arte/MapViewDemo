@@ -64,8 +64,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         alert.addAction(defaultAction)
         
         present(alert, animated: true, completion: nil)
-        
-        stopMonitoring()
     }
     
     /// overlayの描画
@@ -106,18 +104,39 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         )
         let seisekiRegion = CLCircularRegion(
             center: CLLocationCoordinate2DMake(35.618927, 139.744431),
-            radius: 200.0,
+            radius: 50.0,
             identifier: "聖蹟公園"
+        )
+        let kitashinagawaRegion = CLCircularRegion(
+            center: CLLocationCoordinate2DMake(35.622281, 139.739302),
+            radius: 450.0,
+            identifier: "北品川駅"
         )
         
         locationManager.startMonitoring(for: shinbanbaRegion)
         locationManager.startMonitoring(for: seisekiRegion)
+        locationManager.startMonitoring(for: kitashinagawaRegion)
         
-        let shinbanbaCircle = MKCircle(center: shinbanbaRegion.center, radius: shinbanbaRegion.radius)
-        let seisekiCircle = MKCircle(center: seisekiRegion.center, radius: seisekiRegion.radius)
-        mapView.add(shinbanbaCircle)
-        mapView.add(seisekiCircle)
+        addCircleToMapView(region: shinbanbaRegion)
+        addCircleToMapView(region: seisekiRegion)
+        addCircleToMapView(region: kitashinagawaRegion)
         
+        let keikyuStations = [
+            "青物横丁駅" : CLLocationCoordinate2DMake(35.609328, 139.742937),
+            "鮫洲駅" : CLLocationCoordinate2DMake(35.605069, 139.742339),
+            "立会川駅" : CLLocationCoordinate2DMake(35.598559, 139.738929),
+            "大森海岸駅" : CLLocationCoordinate2DMake(35.587684, 139.735390),
+            "平和島駅" : CLLocationCoordinate2DMake(35.578757, 139.734968),
+            "大森町駅" : CLLocationCoordinate2DMake(35.572419, 139.732003),
+            "梅屋敷駅" : CLLocationCoordinate2DMake(35.566939, 139.728344),
+            "京急蒲田駅" : CLLocationCoordinate2DMake(35.560809, 139.723817)
+        ]
+        
+        for station in keikyuStations {
+            let region = CLCircularRegion(center: station.value, radius: 200.0, identifier: station.key)
+            locationManager.startMonitoring(for: region)
+            addCircleToMapView(region: region)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -132,6 +151,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
+    private func addCircleToMapView(region: CLCircularRegion) {
+        let circle = MKCircle(center: region.center, radius: region.radius)
+        mapView.add(circle)
+    }
     
 }
 
