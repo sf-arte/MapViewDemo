@@ -27,9 +27,13 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     func startMonitoring() {
         locationManager.requestAlwaysAuthorization()
         
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.startUpdatingLocation()
+        if CLLocationManager.significantLocationChangeMonitoringAvailable() {
+            locationManager.startMonitoringSignificantLocationChanges()
         }
+    }
+    
+    func stopMonitoring() {
+        locationManager.stopMonitoringSignificantLocationChanges()
     }
     
     /// 位置情報の更新に成功した時の処理
